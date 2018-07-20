@@ -11,7 +11,11 @@ int main() {
 	run_all_func run_all;
 	char *error;
 
+#ifdef WIN32
+	handle = dlopen("./librrhash.dll", RTLD_LAZY);
+#else
 	handle = dlopen("./librrhash.so", RTLD_LAZY);
+#endif
 	if( !handle ) {
 		printf("failed to open:\n");
 		fputs( dlerror(), stderr);
