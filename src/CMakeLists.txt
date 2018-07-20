@@ -46,5 +46,6 @@ ADD_DEPENDENCIES(${PROJECT_NAME} ExpandRand)
 
 target_link_libraries(${PROJECT_NAME} ExpandRand stdc++)
 
-add_executable(test test.cpp)
-ADD_DEPENDENCIES(test ${PROJECT_NAME})
+add_executable(rrtest ${CMAKE_CURRENT_SOURCE_DIR}/test.cpp)
+target_link_libraries(rrtest dl)
+ADD_DEPENDENCIES(rrtest ${PROJECT_NAME})
