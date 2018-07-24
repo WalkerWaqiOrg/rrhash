@@ -41,6 +41,7 @@ void run_all(const char *data, size_t length, unsigned char *hash) {
 	static bool TRACER_ready=false;
 	if(!TRACER_ready) {
 		TRACER=new Tracer;
+		TRACER_ready=true;
 	}
 	else {
 		TRACER->clear();
@@ -160,7 +161,7 @@ void run_all(const char *data, size_t length, unsigned char *hash) {
 			run_ZArrayPatternSearch(seedIn, seedSize);
 			break;
 		}
-		delete(seedIn);
+		free(seedIn);
 	}
 	TRACER->final_result(hash);
 }
