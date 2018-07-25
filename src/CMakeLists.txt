@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0)
 
 project(rrhash)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -std=gnu++11")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -std=gnu++11 -pthread")
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
@@ -44,7 +44,7 @@ add_library(${PROJECT_NAME} MODULE
             ${CMAKE_CURRENT_SOURCE_DIR}/4200_ZArrayPatternSearch.cpp)
 ADD_DEPENDENCIES(${PROJECT_NAME} ExpandRand)
 
-target_link_libraries(${PROJECT_NAME} ExpandRand stdc++)
+target_link_libraries(${PROJECT_NAME} ExpandRand stdc++ pthread)
 
 add_executable(rrtest ${CMAKE_CURRENT_SOURCE_DIR}/test.cpp)
 target_link_libraries(rrtest dl)

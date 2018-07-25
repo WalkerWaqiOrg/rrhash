@@ -17,8 +17,8 @@ private:
 
 public:
 	static Tracer* I() {
-		static Tracer instance;
-		return &instance;
+		thread_local static Tracer Inst;
+		return &Inst;
 	}
 	// small Buf will be read and written
 	uint64_t* smallBuf;

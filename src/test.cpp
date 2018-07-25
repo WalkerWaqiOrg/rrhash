@@ -3,12 +3,43 @@
 #include <stddef.h>
 #include <string.h>
 #include <dlfcn.h>
+#include <thread>
 
 typedef void (*run_all_func)(const char *data, size_t length, unsigned char *hash);
+run_all_func run_all;
+
+void test_a() {
+	char hello[100]="aer39invqbj43to;5j46354q34534999!@#%@#$%^&$&ADGSGWREF";
+	int len=strlen(hello);
+	unsigned char result[32];
+	for(int i=0; i<256; i++) {
+		for(int j=0; j<len; j++) hello[j]+=i;
+		run_all(hello,len,result);
+		fprintf(stderr,"a ");
+		for(int i=0; i<32; i++) {
+			fprintf(stderr,"%02x",result[i]);
+		}
+		fprintf(stderr,"\n");
+	}
+}
+
+void test_b() {
+	char hello[100]="aer39invqbj43to;5j46354q34534999!@#%@#$%^&$&ADGSGWREF";
+	int len=strlen(hello);
+	unsigned char result[32];
+	for(int i=255; i>=0; i--) {
+		for(int j=0; j<len; j++) hello[j]+=i;
+		run_all(hello,len,result);
+		fprintf(stderr,"b ");
+		for(int i=0; i<32; i++) {
+			fprintf(stderr,"%02x",result[i]);
+		}
+		fprintf(stderr,"\n");
+	}
+}
 
 int main() {
 	void *handle;
-	run_all_func run_all;
 	char *error;
 
 #ifdef WIN32
@@ -29,13 +60,11 @@ int main() {
 		exit(1);
 	}
 
-	char hello[100]="aer39invqbj43to;5j46354q34534999!@#%@#$%^&$&ADGSGWREF";
-	int len=strlen(hello);
-	unsigned char result[32];
-	run_all(hello,len,result);
-	for(int i=0; i<32; i++) {
-		printf("%02x ",result[i]);
-	}
-	printf("\n");
+	std::thread thread_a(test_a);
+	std::thread thread_b(test_b);
+	thread_a.join();
+	thread_b.join();
+
 	dlclose(handle);
 }
+
