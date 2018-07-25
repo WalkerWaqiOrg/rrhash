@@ -18,6 +18,7 @@ public:
 	const int bigBufSize=32*1024*1024; //32MB
 	const int bigBufMask=(bigBufSize/8-1)>>3;
 	const uint64_t FNV_PRIME=0x100000001b3ULL;
+	const uint64_t FNV_INIT=0xcbf29ce484222325ULL;
 	int counter;
 	uint64_t fnvKey;
 	uint64_t fnvHistory[8];
@@ -37,15 +38,26 @@ public:
 		rhash_sha3_final(&ctx, result);
 	}
 	void final_result(unsigned char* result) {
-		sha3_update((unsigned char*)this->bigBuf, bigBufSize);
+		uint64_t temp[32];
+		for(int i=0; i<32; i++) temp[i]=FNV_INIT;
+		for(int j=0; j<bigBufSize/8; j+=32) {
+			for(int i=0; i<32; i++) {
+				temp[i]*=FNV_PRIME;
+				temp[i]^=bigBuf[j+i];
+			}
+		}
+		sha3_update((unsigned char*)temp, 8*32);
 		sha3_final(result);
 	}
 	void clear() {
 		rhash_sha3_256_init(&ctx);
 		memset((char*)smallBuf,0,smallBufSize);
 		memset((char*)bigBuf,0,bigBufSize);
+		fnvKey=FNV_INIT;
+		counter=0;
+		for(int i=0; i<8; i++) fnvHistory[i]=0;
 	}
-	Tracer() : counter(0), fnvKey(0xcbf29ce484222325ULL) {
+	Tracer() {
 		smallBuf=(uint64_t*)malloc(smallBufSize);
 		bigBuf=(uint64_t*)malloc(bigBufSize);
 		clear();
