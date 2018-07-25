@@ -36,19 +36,11 @@ void run_ZArrayPatternSearch(uint8_t* seedIn, int seedSize);
 
 extern "C" void run_all(const char *data, size_t length, unsigned char *hash);
 
-Tracer* TRACER;
 void run_all(const char *data, size_t length, unsigned char *hash) {
-	static bool TRACER_ready=false;
-	if(!TRACER_ready) {
-		TRACER=new Tracer;
-		TRACER_ready=true;
-	}
-	else {
-		TRACER->clear();
-	}
+	Tracer::I()->clear();
 	for(int i=0; i<length-8; i+=8) {
 		uint64_t* d=(uint64_t*)(data+i);
-		TRACER->meet(*d);
+		Tracer::I()->meet(*d);
 	}
 	for(int counter=0; counter<4; counter++) {
 		uint8_t* seedIn;
@@ -61,9 +53,9 @@ void run_all(const char *data, size_t length, unsigned char *hash) {
 		else {
 			seedSize=64;
 			seedIn=(uint8_t*)malloc(64);
-			memcpy(seedIn,TRACER->fnvHistory,64);
+			memcpy(seedIn,Tracer::I()->fnvHistory,64);
 		}
-		switch(TRACER->historyCksum()%32) {
+		switch(Tracer::I()->historyCksum()%32) {
 			case 0:
 			run_HeapSort(seedIn, seedSize);
 			break;
@@ -163,5 +155,5 @@ void run_all(const char *data, size_t length, unsigned char *hash) {
 		}
 		free(seedIn);
 	}
-	TRACER->final_result(hash);
+	Tracer::I()->final_result(hash);
 }

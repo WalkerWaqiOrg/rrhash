@@ -5,8 +5,6 @@
 #include "Tracer.h"
 using namespace std;
 
-extern Tracer* TRACER;
-
 struct Pair {
 	uint32_t a;
 	uint32_t b;
@@ -91,7 +89,7 @@ int determinant(int A[N][N], int n)
     }
 	E=(E<<1)^D;
 	//cout<<"E: "<<E<<endl;
-	TRACER->meet(E);
+	Tracer::I()->meet(E);
  
     return D;
 }
@@ -204,21 +202,18 @@ void run_MatrixInverse(uint8_t* seedIn, int seedSize) {
 		inverse(A,inv);
 		int x=0;
 		for(int j=0; j<16; j++) x^=int(inv[j/4][j%4]);
-		TRACER->meet(x);
+		Tracer::I()->meet(x);
 	}
 	delete[] tmp;
 }
 
 #ifdef SELF_TEST
-Tracer* TRACER;
 int main() {
-	TRACER=new Tracer;
 	char hello[100]="aer39invqbj43to;5j46354q34534999!@#%@#$%^&$&ADGSGWREF";
 	int len=strlen(hello);
 	for(int i=0; i<50; i++) {
 		run_MatrixInverse((uint8_t*)hello,len);
 	}
-	delete TRACER;
 	return 0;
 }
 #endif

@@ -9,8 +9,6 @@ using namespace std;
 
 #define N 20
 
-extern Tracer* TRACER;
-
 struct Pair {
 	uint32_t a;
 	uint32_t b;
@@ -84,7 +82,7 @@ void printCodes(struct MinHeapNode* root, string str)
         cout << root->data << ": " << str << "\n";
 	}
 
-	TRACER->meet(root->data);
+	Tracer::I()->meet(root->data);
 
     printCodes(root->left, str + "0");
     printCodes(root->right, str + "1");
@@ -164,15 +162,12 @@ void run_Huffman(uint8_t* seedIn, int seedSize) {
 }
 
 #ifdef SELF_TEST
-Tracer* TRACER;
 int main() {
-	TRACER=new Tracer;
 	char hello[100]="aer39invqbj43to;5j46354q34534999!@#%@#$%^&$&ADGSGWREF";
 	int len=strlen(hello);
 	for(int i=0; i<50; i++) {
 		run_Huffman((uint8_t*)hello,len);
 	}
-	delete TRACER;
 	return 0;
 }
 #endif

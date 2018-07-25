@@ -5,8 +5,6 @@
 #include "Tracer.h"
 using namespace std;
 
-extern Tracer* TRACER;
-
 struct Pair {
 	uint32_t a;
 	uint32_t b;
@@ -90,7 +88,7 @@ inline void BSTree<type>::insertAux(bp& a_subRoot, const type& a_data)
         a_subRoot = new BSTree<type>::BSTNode(a_data);
 	}
     else {
-		if (a_data%256 == a_subRoot->data%256) TRACER->meet(a_subRoot->data);
+		if (a_data%256 == a_subRoot->data%256) Tracer::I()->meet(a_subRoot->data);
 		if (a_data < a_subRoot->data)
 			insertAux(a_subRoot->left,a_data);
 		else if (a_subRoot->data < a_data)
@@ -280,15 +278,12 @@ void run_BinarySearchTree(uint8_t* seedIn, int seedSize) {
 }
 
 #ifdef SELF_TEST
-Tracer* TRACER;
 int main() {
-	TRACER=new Tracer;
 	char hello[100]="aer3invqbj43to;5j46354q34534999!@#%@#$%^&$&ADGSGWREF";
 	int len=strlen(hello);
 	for(int i=0; i<50; i++) {
 		run_BinarySearchTree((uint8_t*)hello,len);
 	}
-	delete TRACER;
 	return 0;
 }
 #endif

@@ -9,8 +9,6 @@ using namespace std;
 #define MAXN (9*1024)
 #define ITER_COUNT 1
 
-extern Tracer* TRACER;
-
 struct Pair {
 	uint32_t a;
 	uint32_t b;
@@ -111,7 +109,7 @@ bool place(int key, int tableID, int cnt, int n)
     if (hashtable[tableID][pos[tableID]]!=INT_MIN)
     {
         int dis = hashtable[tableID][pos[tableID]];
-		TRACER->meet(dis);
+		Tracer::I()->meet(dis);
         hashtable[tableID][pos[tableID]] = key;
         place(dis, (tableID+1)%ver, cnt+1, n);
     }
@@ -192,15 +190,12 @@ void run_CuckooHash(uint8_t* seedIn, int seedSize) {
 }
 
 #ifdef SELF_TEST
-Tracer* TRACER;
 int main() {
-	TRACER=new Tracer;
 	char hello[100]="aer3:nvqbj43to;5j46354q34534999!@#%@#$%^&$&ADGSGWREF";
 	int len=strlen(hello);
 	for(int i=0; i<50; i++) {
 		run_CuckooHash((uint8_t*)hello,len);
 	}
-	delete TRACER;
 	return 0;
 }
 #endif

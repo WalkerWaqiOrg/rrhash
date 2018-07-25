@@ -6,8 +6,6 @@ using namespace std;
 #include "util.h"
 #include "Tracer.h"
 
-extern Tracer* TRACER;
-
 struct Pair {
 	uint32_t a;
 	uint32_t b;
@@ -62,7 +60,7 @@ int longestSubsequence(int a[], int n)
  
             // relation
             dp[i] = 1 + dp[lastIndex];
-			TRACER->meet(dp[i]);
+			Tracer::I()->meet(dp[i]);
         }
         else
             dp[i] = 1;
@@ -113,21 +111,18 @@ void run_IncreasingConsective(uint8_t* seedIn, int seedSize) {
 		}
 		int len=longestSubsequence(iarr+start, end-start);
 		//cout<<"len "<<len<<endl;
-		TRACER->meet(len);
+		Tracer::I()->meet(len);
 	}
 	delete[] arr;
 }
 
 #ifdef SELF_TEST
-Tracer* TRACER;
 int main() {
-	TRACER=new Tracer;
 	char hello[100]="aer9invqbj43to;5j46354q34534999!@#%@#$%^&$&ADGSGWREF";
 	int len=strlen(hello);
 	for(int i=0; i<50; i++) {
 		run_IncreasingConsective((uint8_t*)hello,len);
 	}
-	delete TRACER;
 	return 0;
 }
 #endif

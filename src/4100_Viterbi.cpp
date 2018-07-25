@@ -6,8 +6,6 @@
 #include "Tracer.h"
 using namespace std;
 
-extern Tracer* TRACER;
-
 struct Pair {
 	uint32_t a;
 	uint32_t b;
@@ -121,7 +119,7 @@ void Viterbi(double pi[3], double C[3][3], double E[3][2]) {
 		s=(s<<2)|*itepath;
         //cout << *itepath << " ";
 	}
-	TRACER->meet(int64_t(max)^s);
+	Tracer::I()->meet(int64_t(max)^s);
 }
 
 //int main(void)
@@ -155,15 +153,12 @@ void run_Viterbi(uint8_t* seedIn, int seedSize) {
 }
 
 #ifdef SELF_TEST
-Tracer* TRACER;
 int main() {
-	TRACER=new Tracer;
 	char hello[100]="aer39invqbj43to;5j46354q34534999!@#%@#$%^&$&ADGSGWREF";
 	int len=strlen(hello);
 	for(int i=0; i<50; i++) {
 		run_Viterbi((uint8_t*)hello,len);
 	}
-	delete TRACER;
 	return 0;
 }
 #endif

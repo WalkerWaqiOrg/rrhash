@@ -7,8 +7,6 @@
 #include "Tracer.h"
 using namespace std;
 
-extern Tracer* TRACER;
-
 struct Pair {
 	uint32_t a;
 	uint32_t b;
@@ -120,7 +118,7 @@ void buildSuffixArray(char *txt, int n)
     }
 	uint32_t tmp=0;
     for (int i = 0; i < n; i++) tmp+=(tmp>>16)^suffixes[i].index;
-	TRACER->meet(tmp);
+	Tracer::I()->meet(tmp);
  
     //// Store indexes of all sorted suffixes in the suffix array
     //cout << "Following is suffix array for " << txt << endl;
@@ -157,15 +155,12 @@ void run_SuffixArray(uint8_t* seedIn, int seedSize) {
 }
 
 #ifdef SELF_TEST
-Tracer* TRACER;
 int main() {
-	TRACER=new Tracer;
 	char hello[100]="aier39invqbj43to;5j46354q34534999!@#%@#$%^&$&ADGSGWREF";
 	int len=strlen(hello);
 	for(int i=0; i<50; i++) {
 		run_SuffixArray((uint8_t*)hello,len);
 	}
-	delete TRACER;
 	return 0;
 }
 #endif

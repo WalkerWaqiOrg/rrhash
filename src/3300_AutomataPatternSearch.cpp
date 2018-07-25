@@ -7,8 +7,6 @@
 #include "Tracer.h"
 using namespace std;
 
-extern Tracer* TRACER;
-
 struct Pair {
 	uint32_t a;
 	uint32_t b;
@@ -94,7 +92,7 @@ static void search(char *pat, char *txt, int M, int N)
         state = TF[state][int(txt[i])];
 		tmp=(tmp<<1)^state;
         if (state == M) {
-			TRACER->meet(tmp);
+			Tracer::I()->meet(tmp);
             //printf ("\n Pattern found at index %d", i-M+1);
 		}
     }
@@ -126,15 +124,12 @@ void run_AutomataPatternSearch(uint8_t* seedIn, int seedSize) {
 }
 
 #ifdef SELF_TEST
-Tracer* TRACER;
 int main() {
-	TRACER=new Tracer;
 	char hello[100]="aer39invqbj43to;5j46354q34534999!@#%@#$%^&$&ADGSGWREF";
 	int len=strlen(hello);
 	for(int i=0; i<50; i++) {
 		run_AutomataPatternSearch((uint8_t*)hello,len);
 	}
-	delete TRACER;
 	return 0;
 }
 #endif

@@ -35,8 +35,6 @@
 #include "Tracer.h"
 using namespace std;
 
-extern Tracer* TRACER;
-
 struct Pair {
 	uint32_t a;
 	uint32_t b;
@@ -282,7 +280,7 @@ void BTreeNode::removeFromNonLeaf(int idx)
     else if  (C[idx+1]->n >= t)
     {
         int succ = getSucc(idx);
-		TRACER->meet(succ);
+		Tracer::I()->meet(succ);
         keys[idx] = succ;
         C[idx+1]->remove(succ);
     }
@@ -497,7 +495,7 @@ void BTree::insert(int k)
             // New root has two children now.  Decide which of the
             // two children is going to have new key
             int i = 0;
-			TRACER->meet(s->keys[0]);
+			Tracer::I()->meet(s->keys[0]);
             if (s->keys[0] < k)
                 i++;
             s->C[i]->insertNonFull(k);
@@ -751,15 +749,12 @@ void run_BTree(uint8_t* seedIn, int seedSize) {
 }
 
 #ifdef SELF_TEST
-Tracer* TRACER;
 int main() {
-	TRACER=new Tracer;
 	char hello[100]="aer39invqbj43to;5j46354q34534999!@#%@#$%^&$&ADGSGWREF";
 	int len=strlen(hello);
 	for(int i=0; i<50; i++) {
 		run_BTree((uint8_t*)hello,len);
 	}
-	delete TRACER;
 	return 0;
 }
 #endif

@@ -9,8 +9,6 @@
 #include "Tracer.h"
 using namespace std;
 
-extern Tracer* TRACER;
-
 struct Pair {
 	uint32_t a;
 	uint32_t b;
@@ -47,7 +45,7 @@ void run_RerverPolishNotation_help(int8_t* arr) {
 	for(int i=0; i<Count; i++) {
 		//cout<<" why: "<<int(arr[i])<<endl;
 		if(i%256==0) {
-			TRACER->meet(x);
+			Tracer::I()->meet(x);
 			//cout<<x<<endl;
 		}
 		if(s.size()<2) {
@@ -130,15 +128,12 @@ void run_RerverPolishNotation(uint8_t* seedIn, int seedSize) {
 }
 
 #ifdef SELF_TEST
-Tracer* TRACER;
 int main() {
-	TRACER=new Tracer;
 	char hello[100]="aer39invqbj43to;5j46354q34534999!@#%@#$%^&$&ADGSGWREF";
 	int len=strlen(hello);
 	for(int i=0; i<50; i++) {
 		run_RerverPolishNotation((uint8_t*)hello,len);
 	}
-	delete TRACER;
 	return 0;
 }
 #endif

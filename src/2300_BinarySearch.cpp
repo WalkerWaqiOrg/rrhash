@@ -4,8 +4,6 @@
 #include "util.h"
 #include "Tracer.h"
 
-extern Tracer* TRACER;
-
 struct Pair {
 	uint32_t a;
 	uint32_t b;
@@ -85,11 +83,11 @@ void run_BinarySearch(uint8_t* seedIn, int seedSize) {
 		int32_t nearest;
 		bool found=binarySearch(iarr+start, end-start, avg, &nearest);
 		if(found) {
-			TRACER->meet(avg);
+			Tracer::I()->meet(avg);
 			//cout<<"found "<<avg<<endl;
 		}
 		else {
-			TRACER->meet(~nearest);
+			Tracer::I()->meet(~nearest);
 			//cout<<"not found "<<avg<<" nearest "<<nearest<<endl;
 		}
 	}
@@ -98,15 +96,12 @@ void run_BinarySearch(uint8_t* seedIn, int seedSize) {
 }
 
 #ifdef SELF_TEST
-Tracer* TRACER;
 int main() {
-	TRACER=new Tracer;
 	char hello[100]="aer39invqbj3to;5j46354q34534999!@#%@#$%^&$&ADGSGWREF";
 	int len=strlen(hello);
 	for(int i=0; i<50; i++) {
 		run_BinarySearch((uint8_t*)hello,len);
 	}
-	delete TRACER;
 	return 0;
 }
 #endif

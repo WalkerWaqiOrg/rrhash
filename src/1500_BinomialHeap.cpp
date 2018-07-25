@@ -12,8 +12,6 @@ using namespace std;
 
 #define THRES 2048
 
-extern Tracer* TRACER;
-
 struct Pair {
 	uint64_t a;
 	uint64_t b;
@@ -97,7 +95,7 @@ list<Node<T>*> unionBionomialHeap(list<Node<T>*> l1,
         {
             _new.push_back(*it);
             it++;
-			TRACER->meet( (*it)->data );
+			Tracer::I()->meet( (*it)->data );
         }
         // if D(l1) > D(l2)
         else
@@ -358,7 +356,7 @@ void run_BinomialHeap(uint8_t* seedIn, int seedSize) {
 				x^=temp->data;
 				//printf("haha %016lx\n",x);
 				totCount--;
-				if(temp->data%16==0) TRACER->meet(x);
+				if(temp->data%16==0) Tracer::I()->meet(x);
 			}
 			if(x%2==0&&totCount<THRES) {
 				_heap = insert<uint64_t>(_heap,arr[i].a);
@@ -375,15 +373,12 @@ void run_BinomialHeap(uint8_t* seedIn, int seedSize) {
 #undef ITER_COUNT
 
 #ifdef SELF_TEST
-Tracer* TRACER;
 int main() {
-	TRACER=new Tracer;
 	char hello[100]="aer39invqbj43to;5j46354q34534999!@#%@#%^&$&ADGSGWREF";
 	int len=strlen(hello);
 	for(int i=0; i<50; i++) {
 		run_BinomialHeap((uint8_t*)hello,len);
 	}
-	delete TRACER;
 	return 0;
 }
 #endif

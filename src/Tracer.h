@@ -8,7 +8,18 @@
 #include "ExpandRand/sha3.h"
 
 class Tracer {
+private:
+	Tracer() {
+		smallBuf=(uint64_t*)malloc(smallBufSize);
+		bigBuf=(uint64_t*)malloc(bigBufSize);
+		clear();
+	}
+
 public:
+	static Tracer* I() {
+		static Tracer instance;
+		return &instance;
+	}
 	// small Buf will be read and written
 	uint64_t* smallBuf;
 	const int smallBufSize=128*1024; //128KB
@@ -56,11 +67,6 @@ public:
 		fnvKey=FNV_INIT;
 		counter=0;
 		for(int i=0; i<8; i++) fnvHistory[i]=0;
-	}
-	Tracer() {
-		smallBuf=(uint64_t*)malloc(smallBufSize);
-		bigBuf=(uint64_t*)malloc(bigBufSize);
-		clear();
 	}
 	~Tracer() {
 		free(smallBuf);

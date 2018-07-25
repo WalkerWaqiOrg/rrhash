@@ -9,8 +9,6 @@
 #define V_COUNT 36000
 #define ITER_COUNT 1
 
-extern Tracer* TRACER;
-
 struct Pair {
 	uint32_t a;
 	uint32_t b;
@@ -163,7 +161,7 @@ void KruskalMST(struct Graph* graph)
         if (x != y)
         {
             result[e++] = next_edge;
-			TRACER->meet(next_edge.weight);
+			Tracer::I()->meet(next_edge.weight);
             Union(subsets, x, y);
         }
         // Else discard the next_edge
@@ -243,15 +241,12 @@ void run_Kruskal(uint8_t* seedIn, int seedSize) {
 #undef V_COUNT
 
 #ifdef SELF_TEST
-Tracer* TRACER;
 int main() {
-	TRACER=new Tracer;
 	char hello[100]="aer39invqbj43to;5j46354q34534999!@#%@#$%^&$&ADGSGWREF";
 	int len=strlen(hello);
 	for(int i=0; i<50; i++) {
 		run_Kruskal((uint8_t*)hello,len);
 	}
-	delete TRACER;
 	return 0;
 }
 #endif

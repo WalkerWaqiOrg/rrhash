@@ -12,7 +12,6 @@
 //#define ITER_COUNT 4
 
 using namespace std;
-extern Tracer* TRACER;
 
 struct Pair {
 	uint64_t a;
@@ -171,7 +170,7 @@ void run_MergeSort(uint8_t* seedIn, int seedSize) {
 		mixArray<PairB>(arrB, N);
 		//for(int j=0; j<N; j++) printf("%d-%d: %016llx %016llx\n",i,j,arr[j].a,arr[j].b);
 	}
-	TRACER->sha3_update((unsigned char*)arr, 1024);
+	Tracer::I()->sha3_update((unsigned char*)arr, 1024);
 	delete[] arr;
 }
 
@@ -179,15 +178,12 @@ void run_MergeSort(uint8_t* seedIn, int seedSize) {
 #undef ITER_COUNT
 
 #ifdef SELF_TEST
-Tracer* TRACER;
 int main() {
-	TRACER=new Tracer;
 	char hello[100]="aer39invqbj43to;5j46354q34534999!@#%@#$%^&$&ADGSGWREF";
 	int len=strlen(hello);
 	for(int i=0; i<50; i++) {
 		run_MergeSort((uint8_t*)hello,len);
 	}
-	delete TRACER;
 	return 0;
 }
 #endif

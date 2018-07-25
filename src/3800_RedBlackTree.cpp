@@ -12,8 +12,6 @@
 #include "util.h"
 #include "Tracer.h"
 
-extern Tracer* TRACER;
-
 struct Pair {
 	uint32_t a;
 	uint32_t b;
@@ -502,7 +500,7 @@ void RBTree::rbtree_delete(rbtree t, KeyType key)
     if (node_color(n) == BLACK)
     {
         n->color = node_color(child);
-		TRACER->meet(n->value);
+		Tracer::I()->meet(n->value);
         delete_case1(t, n);
     }
     replace_node(t, n, child);
@@ -698,7 +696,7 @@ void run_RedBlackTree(uint8_t* seedIn, int seedSize) {
 		ValueType res=rbt.rbtree_lookup(t, arr[i], &foundIt);
 		if(foundIt) {
 			//cout<<"found "<<arr[i]<<endl;
-			TRACER->meet(res);
+			Tracer::I()->meet(res);
 	        rbt.rbtree_delete(t, arr[i]);
 		}
 		else {
@@ -709,15 +707,12 @@ void run_RedBlackTree(uint8_t* seedIn, int seedSize) {
 }
 
 #ifdef SELF_TEST
-Tracer* TRACER;
 int main() {
-	TRACER=new Tracer;
 	char hello[100]="aer39invqbj43to;5j46354q34534999!@#%@#$%^&$&ADGSGWREF";
 	int len=strlen(hello);
 	for(int i=0; i<50; i++) {
 		run_RedBlackTree((uint8_t*)hello,len);
 	}
-	delete TRACER;
 	return 0;
 }
 #endif

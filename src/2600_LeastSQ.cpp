@@ -8,8 +8,6 @@
 #include "Tracer.h"
 using namespace std;
 
-extern Tracer* TRACER;
-
 static void fillDoubleArray(uint8_t* seedIn, int seedSize, double arr[], int n) {
 	uint32_t* rand1024=new uint32_t[1024]; //1024 32-b values 
 	expandRand4KB(seedIn, seedSize, (uint8_t*)rand1024);
@@ -156,22 +154,19 @@ void run_LeastSQ(uint8_t* seedIn, int seedSize) {
 		llsq(step, arr+i, arr+i+step, a, b);
 		int idx=int(a*10000);
 		arr[uint32_t(idx)%Count]=b;
-		TRACER->meet(idx);
+		Tracer::I()->meet(idx);
 		//printf("result of %d is %d\n",i,idx);
 	}
 	delete[] arr;
 }
 
 #ifdef SELF_TEST
-Tracer* TRACER;
 int main() {
-	TRACER=new Tracer;
 	char hello[100]="aer39iqbj43to;5j46354q34534999!@#%@#$%^&$&ADGSGWREF";
 	int len=strlen(hello);
 	for(int i=0; i<50; i++) {
 		run_LeastSQ((uint8_t*)hello,len);
 	}
-	delete TRACER;
 	return 0;
 }
 #endif

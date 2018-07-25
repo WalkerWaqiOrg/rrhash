@@ -4,8 +4,6 @@ using namespace std;
 #include "util.h"
 #include "Tracer.h"
 
-extern Tracer* TRACER;
-
 struct Pair {
 	uint32_t a;
 	uint32_t b;
@@ -82,7 +80,7 @@ int partition(int arr[], int l, int r)
             i++;
         }
     }
-	TRACER->meet(arr[r]);
+	Tracer::I()->meet(arr[r]);
     swap(&arr[i], &arr[r]);
     return i;
 }
@@ -114,7 +112,7 @@ void run_KthSmallest(uint8_t* seedIn, int seedSize) {
 		int32_t k=(startend[i].a>>16)%1024;
 		if(k<(end-start)) k%=(end-start);
 		int result=kthSmallest(iarr, start, end-1, k);
-		TRACER->meet(result);
+		Tracer::I()->meet(result);
 		//cout<<"k-th smallest is "<<result<<endl;
 	}
 	delete[] arr;
@@ -122,15 +120,12 @@ void run_KthSmallest(uint8_t* seedIn, int seedSize) {
 }
 
 #ifdef SELF_TEST
-Tracer* TRACER;
 int main() {
-	TRACER=new Tracer;
 	char hello[100]="aer39invqbj43o;5j46354q34534999!@#%@#$%^&$&ADGSGWREF";
 	int len=strlen(hello);
 	for(int i=0; i<50; i++) {
 		run_KthSmallest((uint8_t*)hello,len);
 	}
-	delete TRACER;
 	return 0;
 }
 #endif

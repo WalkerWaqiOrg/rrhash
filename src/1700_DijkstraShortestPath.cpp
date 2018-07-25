@@ -7,8 +7,6 @@
 #define V_COUNT 3200
 #define ITER_COUNT 1
 
-extern Tracer* TRACER;
-
 struct Pair {
 	uint64_t a;
 	uint64_t b;
@@ -301,7 +299,7 @@ static void dijkstra(struct Graph* graph, int src)
                                           pCrawl->weight + dist[u] < dist[v])
             {
                 dist[v] = dist[u] + pCrawl->weight;
-				TRACER->meet(dist[v]);
+				Tracer::I()->meet(dist[v]);
  
                 // update distance value in min heap also
                 decreaseKey(minHeap, v, dist[v]);
@@ -356,15 +354,12 @@ void run_Dijkstra(uint8_t* seedIn, int seedSize) {
 #undef V_COUNT
 
 #ifdef SELF_TEST
-Tracer* TRACER;
 int main() {
-	TRACER=new Tracer;
 	char hello[100]="aer39invqbj43to;5j46354q34534999!@#%@#$%^&$&ADGSGWREF";
 	int len=strlen(hello);
 	for(int i=0; i<50; i++) {
 		run_Dijkstra((uint8_t*)hello,len);
 	}
-	delete TRACER;
 	return 0;
 }
 #endif

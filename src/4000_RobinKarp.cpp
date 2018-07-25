@@ -6,8 +6,6 @@ Algorithm given in the CLRS book */
 #include "Tracer.h"
 using namespace std;
 
-extern Tracer* TRACER;
-
 struct Pair {
 	uint32_t a;
 	uint32_t b;
@@ -71,7 +69,7 @@ static void search(char pat[], char txt[], int q, int M, int N)
         // check for characters on by one
         if ( p == t )
         {
-			TRACER->meet(p);
+			Tracer::I()->meet(p);
             /* Check for characters one by one */
             for (j = 0; j < M; j++)
             {
@@ -82,7 +80,7 @@ static void search(char pat[], char txt[], int q, int M, int N)
             // if p == t and pat[0...M-1] = txt[i, i+1, ...i+M-1]
             if (j == M) {
                 //printf("Pattern found at index %d \n", i);
-				TRACER->meet(M);
+				Tracer::I()->meet(M);
 			}
         }
  
@@ -144,15 +142,12 @@ void run_RobinKarp(uint8_t* seedIn, int seedSize) {
 }
 
 #ifdef SELF_TEST
-Tracer* TRACER;
 int main() {
-	TRACER=new Tracer;
 	char hello[100]="aer39invqbj43to;5j46354q34534999!@#%@#$%^&$&ADGSGWREF";
 	int len=strlen(hello);
 	for(int i=0; i<50; i++) {
 		run_RobinKarp((uint8_t*)hello,len);
 	}
-	delete TRACER;
 	return 0;
 }
 #endif

@@ -7,8 +7,6 @@ using namespace std;
 #include "util.h"
 #include "Tracer.h"
 
-extern Tracer* TRACER;
-
 struct Pair {
 	uint32_t a;
 	uint32_t b;
@@ -131,7 +129,7 @@ void printJobScheduling(Job arr[], int n)
                              availableSlot);
  
             //cout << arr[i].id << " "<<endl;
-			TRACER->meet(arr[i].id);
+			Tracer::I()->meet(arr[i].id);
         }
     }
 }
@@ -167,15 +165,12 @@ void run_JobSchedule(uint8_t* seedIn, int seedSize) {
 }
 
 #ifdef SELF_TEST
-Tracer* TRACER;
 int main() {
-	TRACER=new Tracer;
 	char hello[100]="aer39invqbj43to;5j46354q34534999!@#%@#$%^&$&ADGSGWREF";
 	int len=strlen(hello);
 	for(int i=0; i<50; i++) {
 		run_JobSchedule((uint8_t*)hello,len);
 	}
-	delete TRACER;
 	return 0;
 }
 #endif

@@ -6,8 +6,6 @@
 #include "Tracer.h"
 using namespace std;
 
-extern Tracer* TRACER;
-
 struct Pair {
 	uint32_t a;
 	uint32_t b;
@@ -104,7 +102,7 @@ void SuffixTrieNode::insertSuffix(string s, int index)
             children[cIndex] = new SuffixTrieNode();
 		}
 		else {
-			TRACER->meet(cIndex);
+			Tracer::I()->meet(cIndex);
 		}
  
         // Recur for next suffix
@@ -147,7 +145,7 @@ void SuffixTrie::search(string pat)
        for (i = result->begin(); i != result->end(); ++i) {
 	     int tmp=*i - patLen;
          //cout << "Pattern found at position " <<tmp<<endl;
-	     if(tmp!=0) TRACER->meet(tmp);
+	     if(tmp!=0) Tracer::I()->meet(tmp);
 	   }
     }
 }
@@ -197,15 +195,12 @@ void run_SuffixTrie(uint8_t* seedIn, int seedSize) {
 }
 
 #ifdef SELF_TEST
-Tracer* TRACER;
 int main() {
-	TRACER=new Tracer;
 	char hello[100]="aer39invqbj43to;5j46354q34534999!@#%@#$%^&$&ADGSGWREF";
 	int len=strlen(hello);
 	for(int i=0; i<50; i++) {
 		run_SuffixTrie((uint8_t*)hello,len);
 	}
-	delete TRACER;
 	return 0;
 }
 #endif

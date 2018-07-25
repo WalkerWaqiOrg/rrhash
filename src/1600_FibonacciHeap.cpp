@@ -24,7 +24,6 @@
 
 #define THRES 2048
 
-extern Tracer* TRACER;
 
 struct Pair {
 	uint64_t a;
@@ -212,7 +211,7 @@ private:
 		}
 		// merge sibling lists
 		if(target) {
-			TRACER->meet(node->data->key);
+			Tracer::I()->meet(node->data->key);
 			target->right_sibling.swap(node->right_sibling);
 			target->right_sibling->left_sibling.swap(node->right_sibling->left_sibling);
 			if( set_min && Compare()(node->data->key,target->data->key) )
@@ -727,7 +726,7 @@ void run_FibonacciHeap(uint8_t* seedIn, int seedSize) {
 				x^=temp.data();
 				//printf("haha %016lx\n",x);
 				totCount--;
-				if(temp.data()%16==0) TRACER->meet(temp.key());
+				if(temp.data()%16==0) Tracer::I()->meet(temp.key());
 			}
 			if(x%2==0&&totCount<THRES) {
 				heap.insert(arr[i].a,arr[i].b);
@@ -744,15 +743,12 @@ void run_FibonacciHeap(uint8_t* seedIn, int seedSize) {
 #undef ITER_COUNT
 
 #ifdef SELF_TEST
-Tracer* TRACER;
 int main() {
-	TRACER=new Tracer;
 	char hello[100]="aer39invqbj43to;5j46354q34534999!@#%@#$%^&$&ADGSGWREF";
 	int len=strlen(hello);
 	for(int i=0; i<50; i++) {
 		run_FibonacciHeap((uint8_t*)hello,len);
 	}
-	delete TRACER;
 	return 0;
 }
 #endif

@@ -8,8 +8,6 @@ using namespace std;
 
 #define ITER_COUNT 40
 
-extern Tracer* TRACER;
-
 struct Pair {
 	uint32_t a;
 	uint32_t b;
@@ -159,7 +157,7 @@ static struct Node* insert(struct Node* node, int key)
     if (balance > 1 && key > node->left->key)
     {
         node->left =  leftRotate(node->left);
-		TRACER->meet(node->left->key);
+		Tracer::I()->meet(node->left->key);
         return rightRotate(node);
     }
  
@@ -235,7 +233,7 @@ static struct Node* deleteNode(struct Node* root, int key)
             // node with two children: Get the inorder
             // successor (smallest in the right subtree)
             struct Node* temp = minValueNode(root->right);
-			TRACER->meet(temp->key);
+			Tracer::I()->meet(temp->key);
  
             // Copy the inorder successor's data to this node
             root->key = temp->key;
@@ -355,15 +353,12 @@ void run_AVLTree(uint8_t* seedIn, int seedSize) {
 }
 
 #ifdef SELF_TEST
-Tracer* TRACER;
 int main() {
-	TRACER=new Tracer;
 	char hello[100]="aer39invbj43to;5j46354q34534999!@#%@#$%^&$&ADGSGWREF";
 	int len=strlen(hello);
 	for(int i=0; i<50; i++) {
 		run_AVLTree((uint8_t*)hello,len);
 	}
-	delete TRACER;
 	return 0;
 }
 #endif

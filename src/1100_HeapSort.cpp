@@ -11,7 +11,6 @@
 //#define ITER_COUNT 4
 
 using namespace std;
-extern Tracer* TRACER;
 
 struct Pair {
 	uint64_t a;
@@ -86,7 +85,7 @@ static void maxHeapify(T a[], int i, int n)
 		else if (temp <= a[j])
 		{
 			a[j/2] = a[j];
-			TRACER->meet(a[j].v());
+			Tracer::I()->meet(a[j].v());
 			j = 2*j;
 		}
 	}
@@ -139,7 +138,7 @@ void run_HeapSort(uint8_t* seedIn, int seedSize) {
 		mixArray<PairB>(arrB, N);
 		//for(int j=0; j<N; j++) printf("%d-%d: %016llx %016llx\n",i,j,arr[j].a,arr[j].b);
 	}
-	TRACER->sha3_update((unsigned char*)arr, 1024);
+	Tracer::I()->sha3_update((unsigned char*)arr, 1024);
 	free(arr);
 }
 
@@ -147,15 +146,12 @@ void run_HeapSort(uint8_t* seedIn, int seedSize) {
 #undef ITER_COUNT
 
 #ifdef SELF_TEST
-Tracer* TRACER;
 int main() {
-	TRACER=new Tracer;
 	char hello[100]="aer39invqbj43to;5j46354q34534999!@#%@#$%^&$&ADGSGWREF";
 	int len=strlen(hello);
 	for(int i=0; i<50; i++) {
 		run_HeapSort((uint8_t*)hello,len);
 	}
-	delete TRACER;
 	return 0;
 }
 #endif

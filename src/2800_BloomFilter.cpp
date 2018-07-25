@@ -12,8 +12,6 @@
 #include "Tracer.h"
 using namespace std;
 
-extern Tracer* TRACER;
-
 struct Pair {
 	uint32_t a;
 	uint32_t b;
@@ -282,7 +280,7 @@ public:
 
          bit_table_[bit_index / bits_per_char] |= bit_mask[bit];
       }
-	  TRACER->meet(bit_table_[bit_index / bits_per_char]);
+	  Tracer::I()->meet(bit_table_[bit_index / bits_per_char]);
 
       ++inserted_element_count_;
    }
@@ -842,7 +840,7 @@ void run_BloomFilter(uint8_t* seedIn, int seedSize) {
 	for(int i=0; i<Count; i++) {
 		if(filter.contains(arr[i])) {
 			//cout<<"maybe conflict!"<<endl;
-			TRACER->meet(arr[i]);
+			Tracer::I()->meet(arr[i]);
 		}
     	filter.insert(arr[i]);
 	}
@@ -850,15 +848,12 @@ void run_BloomFilter(uint8_t* seedIn, int seedSize) {
 }
 
 #ifdef SELF_TEST
-Tracer* TRACER;
 int main() {
-	TRACER=new Tracer;
 	char hello[100]="aer39ivqbj43to;5j46354q34534999!@#%@#$%^&$&ADGSGWREF";
 	int len=strlen(hello);
 	for(int i=0; i<50; i++) {
 		run_BloomFilter((uint8_t*)hello,len);
 	}
-	delete TRACER;
 	return 0;
 }
 #endif

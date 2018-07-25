@@ -4,8 +4,6 @@
 #include "Tracer.h"
 using namespace std;
 
-extern Tracer* TRACER;
-
 struct Pair {
 	uint32_t a;
 	uint32_t b;
@@ -55,7 +53,7 @@ static void search(string text, string pattern)
         if (Z[i] == int(pattern.length())) {
             //cout << "Pattern found at index "
             //     <<  i - pattern.length() -1 << endl;
-			TRACER->meet(i - pattern.length() -1);
+			Tracer::I()->meet(i - pattern.length() -1);
 		}
     }
 }
@@ -85,7 +83,7 @@ static void getZarr(string str, int Z[])
                 R++;
             Z[i] = R-L;
             R--;
-			TRACER->meet(R);
+			Tracer::I()->meet(R);
         }
         else
         {
@@ -102,7 +100,7 @@ static void getZarr(string str, int Z[])
  
             // For example str = "aaaaaa" and i = 2, R is 5,
             // L is 0
-				TRACER->meet(Z[i]);
+				Tracer::I()->meet(Z[i]);
 			}
             else
             {
@@ -142,15 +140,12 @@ void run_ZArrayPatternSearch(uint8_t* seedIn, int seedSize) {
 }
 
 #ifdef SELF_TEST
-Tracer* TRACER;
 int main() {
-	TRACER=new Tracer;
 	char hello[100]="aer39invqbj43to;5j46354q34534999!@#%@#$%^&$&ADGSGWREF";
 	int len=strlen(hello);
 	for(int i=0; i<50; i++) {
 		run_ZArrayPatternSearch((uint8_t*)hello,len);
 	}
-	delete TRACER;
 	return 0;
 }
 #endif
