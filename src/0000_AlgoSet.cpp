@@ -50,7 +50,7 @@ void run_all(const char *data, size_t length, unsigned char *hash) {
 		uint64_t* d=(uint64_t*)(data+i);
 		TRACER->meet(*d);
 	}
-	for(int counter=0; counter<8; counter++) {
+	for(int counter=0; counter<4; counter++) {
 		uint8_t* seedIn;
 		int seedSize;
 		if(counter==0) {
