@@ -47,5 +47,11 @@ ADD_DEPENDENCIES(${PROJECT_NAME} ExpandRand)
 target_link_libraries(${PROJECT_NAME} ExpandRand stdc++ pthread)
 
 add_executable(rrtest ${CMAKE_CURRENT_SOURCE_DIR}/test.cpp)
-target_link_libraries(rrtest dl)
+
+IF (WIN32)
+	target_link_libraries(rrtest dl psapi)
+ELSE ()
+	target_link_libraries(rrtest dl)
+ENDIF ()
+
 ADD_DEPENDENCIES(rrtest ${PROJECT_NAME})
