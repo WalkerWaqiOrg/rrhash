@@ -73,11 +73,20 @@ public:
 		free(bigBuf);
 	}
 	// 128bit multiplication
-	void extmul(uint64_t& a, uint64_t& b) {
+	/*void extmul(uint64_t& a, uint64_t& b) {
 		__int128 result = (__int128)a * (__int128)b;
 		a = result >> 64;
 		b = (int64_t)result;
+	}*/
+	void extmul(uint64_t& a, uint64_t& b) {
+		uint64_t x1,x2,y1,y2;
+		x1=a; y1=b;
+		x2=(a<<32)|(b>>32);
+		y2=(b<<32)|(a>>32);
+		a = x1*y1;
+		b = x2*y2;
 	}
+
 	void meet(uint64_t value) {
 		uint64_t oldKey=fnvKey;
 		fnvKey*=FNV_PRIME;
