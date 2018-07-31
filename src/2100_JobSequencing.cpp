@@ -148,7 +148,7 @@ void printJobScheduling(Job arr[], int n)
 //}
 
 void run_JobSchedule(uint8_t* seedIn, int seedSize) {
-	const int Count=1024*128;
+	const int Count=1024*25;
     Job* jobList=new Job[Count];
 	Pair* arr=new Pair[Count];
 	int deadLine=1;

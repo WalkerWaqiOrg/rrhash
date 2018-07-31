@@ -62,7 +62,7 @@ static bool binarySearch(int32_t* array, int n, int32_t search, int32_t* value) 
 
 void run_BinarySearch(uint8_t* seedIn, int seedSize) {
 	const int Count=64*1024;
-	const int IterCount=180*1024;
+	const int IterCount=36*1024;
 	Pair* arr=new Pair[Count/2];
 	int32_t* iarr=(int32_t*)arr;
 	fillPairArray(seedIn, seedSize, arr, Count/2);

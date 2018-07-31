@@ -145,7 +145,7 @@ void llsq ( int n, double x[], double y[], double &a, double &b )
 //}
 
 void run_LeastSQ(uint8_t* seedIn, int seedSize) {
-	const int Count=32*1024;
+	const int Count=6*1024;
 	double* arr=new double[Count];
 	fillDoubleArray(seedIn, seedSize, arr, Count);
 	const int step=256;

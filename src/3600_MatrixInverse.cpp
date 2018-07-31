@@ -191,7 +191,7 @@ void display(T A[N][N])
 
 
 void run_MatrixInverse(uint8_t* seedIn, int seedSize) {
-	const int Count=80*1024;
+	const int Count=16*1024;
 	Pair* tmp=new Pair[Count/8];
 	fillPairArray(seedIn, seedSize, tmp, Count/8);
 	char* arr=(char*)tmp;

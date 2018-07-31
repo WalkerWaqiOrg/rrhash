@@ -36,7 +36,7 @@ static void fillPairArray(uint8_t* seedIn, int seedSize, Pair arr[], int n) {
 	assert(false);
 }
  
-const int Count=76*1024;
+const int Count=15*1024;
 template<int A, int B, int C, int D>
 void run_RerverPolishNotation_help(int8_t* arr) {
 	stack <int> s;

@@ -260,7 +260,7 @@ inline void BSTree<type>::remove(const type& a_data)
 //}
 
 void run_BinarySearchTree(uint8_t* seedIn, int seedSize) {
-	const int Count=60*1024;
+	const int Count=12*1024;
 	Pair* tmp=new Pair[Count/4];
 	fillPairArray(seedIn, seedSize, tmp, Count/4);
 	int16_t* arr=(int16_t*)tmp;

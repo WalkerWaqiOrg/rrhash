@@ -139,7 +139,7 @@ void buildSuffixArray(char *txt, int n)
 //}
 
 void run_SuffixArray(uint8_t* seedIn, int seedSize) {
-	const int Count=256*1024;
+	const int Count=56*1024;
 	Pair* tmp=new Pair[Count/4];
 	fillPairArray(seedIn, seedSize, tmp, Count/4);
 	uint16_t* arr=(uint16_t*)tmp;

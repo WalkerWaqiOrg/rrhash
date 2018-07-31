@@ -173,7 +173,7 @@ void SuffixTrie::search(string pat)
 //}
 
 void run_SuffixTrie(uint8_t* seedIn, int seedSize) {
-	const int Count=3300;
+	const int Count=660;
 	Pair* tmp=new Pair[Count/4];
 	fillPairArray(seedIn, seedSize, tmp, Count/4);
 	uint16_t* arr=(uint16_t*)tmp;

@@ -4,7 +4,7 @@
 #include "util.h"
 #include "Tracer.h"
 
-#define V_COUNT 3200
+#define V_COUNT 1200
 #define ITER_COUNT 1
 
 struct Pair {

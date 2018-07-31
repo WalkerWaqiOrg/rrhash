@@ -25,7 +25,7 @@
 using namespace std;
 
 #define N (511*1024/16)
-#define ITER_COUNT 13
+#define ITER_COUNT 3
 //#define N 480
 //#define ITER_COUNT 4
 

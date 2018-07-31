@@ -3,7 +3,7 @@
 #include "util.h"
 #include "Tracer.h"
  
-#define N (460*1024/16)
+#define N (95*1024/16)
 #define ITER_COUNT 4
 //#define N 480
 //#define ITER_COUNT 4

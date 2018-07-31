@@ -5,7 +5,7 @@
 #include "util.h"
 #include "Tracer.h"
 using namespace std;
-#define N (400*3)
+#define N (80*3)
 #define ITER_COUNT 1
 //#define N 480
 //#define ITER_COUNT 4

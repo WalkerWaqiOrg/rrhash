@@ -132,7 +132,7 @@ void Viterbi(double pi[3], double C[3][3], double E[3][2]) {
 //}
 
 void run_Viterbi(uint8_t* seedIn, int seedSize) {
-	const int Count=160*1024;
+	const int Count=32*1024;
 	Pair* tmp=new Pair[Count/2];
 	fillPairArray(seedIn, seedSize, tmp, Count/2);
 	int* arr=(int*)tmp;

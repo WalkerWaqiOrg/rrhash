@@ -125,7 +125,7 @@ static void getZarr(string str, int Z[])
 //}
 
 void run_ZArrayPatternSearch(uint8_t* seedIn, int seedSize) {
-	const int Count=72*1024;
+	const int Count=14*1024;
 	Pair* tmp=new Pair[Count/8];
 	fillPairArray(seedIn, seedSize, tmp, Count/8);
 	char* arr=(char*)tmp;

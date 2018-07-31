@@ -111,7 +111,7 @@ static void search(char *pat, char *txt, int M, int N)
 
 
 void run_AutomataPatternSearch(uint8_t* seedIn, int seedSize) {
-	const int Count=140*1024;
+	const int Count=28*1024;
 	Pair* tmp=new Pair[Count/8];
 	fillPairArray(seedIn, seedSize, tmp, Count/8);
 	char* arr=(char*)tmp;

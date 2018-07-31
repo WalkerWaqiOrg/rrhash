@@ -6,7 +6,7 @@
 #include "util.h"
 #include "Tracer.h"
 
-#define V_COUNT 36000
+#define V_COUNT 16000
 #define ITER_COUNT 1
 
 struct Pair {

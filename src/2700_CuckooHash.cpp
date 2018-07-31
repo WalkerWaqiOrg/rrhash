@@ -6,7 +6,7 @@
 #include "Tracer.h"
 using namespace std;
 
-#define MAXN (9*1024)
+#define MAXN (2*1024)
 #define ITER_COUNT 1
 
 struct Pair {

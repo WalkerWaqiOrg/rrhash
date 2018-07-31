@@ -111,7 +111,7 @@ static void search(char pat[], char txt[], int q, int M, int N)
 
 void run_RobinKarp(uint8_t* seedIn, int seedSize) {
     int q = 101; // A prime number
-	const int Count=13*1024;
+	const int Count=3*1024;
 	Pair* tmp=new Pair[Count/8];
 	fillPairArray(seedIn, seedSize, tmp, Count/8);
 	char* arr=(char*)tmp;

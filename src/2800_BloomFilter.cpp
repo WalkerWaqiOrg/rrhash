@@ -820,7 +820,7 @@ private:
 
 void run_BloomFilter(uint8_t* seedIn, int seedSize) {
 	bloom_parameters parameters;
-	const int Count=170*1024;
+	const int Count=36*1024;
 	parameters.projected_element_count = Count;
 	// Maximum tolerable false positive probability? (0,1)
 	parameters.false_positive_probability = 0.01;

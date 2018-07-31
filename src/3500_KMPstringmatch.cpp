@@ -129,7 +129,7 @@ static void computeLPSArray(char *pat, int M, int *lps)
 
 
 void run_KMPstring(uint8_t* seedIn, int seedSize) {
-	const int Count=128*1024;
+	const int Count=25*1024;
 	Pair* tmp=new Pair[Count/8];
 	fillPairArray(seedIn, seedSize, tmp, Count/8);
 	char* arr=(char*)tmp;

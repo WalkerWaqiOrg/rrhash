@@ -7,7 +7,7 @@ using namespace std;
 #include "util.h"
 #include "Tracer.h"
 
-#define N 20
+#define N 4
 
 struct Pair {
 	uint32_t a;

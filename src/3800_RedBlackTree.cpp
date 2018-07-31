@@ -685,7 +685,7 @@ void print_tree(rbtree t)
 //}
 
 void run_RedBlackTree(uint8_t* seedIn, int seedSize) {
-	const int Count=3*1024;
+	const int Count=1024;
 	Pair* tmp=new Pair[Count/4];
 	fillPairArray(seedIn, seedSize, tmp, Count/4);
 	int16_t* arr=(int16_t*)tmp;

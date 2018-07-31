@@ -78,7 +78,7 @@ uint32_t knapSack(uint32_t W, uint16_t wt[], uint16_t val[], uint32_t n) {
 
 void run_KnapSack01(uint8_t* seedIn, int seedSize) {
 	const int Count=4*1024;
-	const int IterCount=12;
+	const int IterCount=2;
 	Pair* tmp1=new Pair[Count/4];
 	fillPairArray(seedIn, seedSize, tmp1, Count/4);
 	uint16_t* val=(uint16_t*)tmp1;

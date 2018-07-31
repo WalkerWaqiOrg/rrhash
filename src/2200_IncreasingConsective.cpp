@@ -89,7 +89,7 @@ int longestSubsequence(int a[], int n)
 
 void run_IncreasingConsective(uint8_t* seedIn, int seedSize) {
 	const int Count=180*1024;
-	const int IterCount=40;
+	const int IterCount=8;
 	Pair* arr=new Pair[Count/2];
 	int32_t* iarr=(int32_t*)arr;
 	fillPairArray(seedIn, seedSize, arr, Count/2);

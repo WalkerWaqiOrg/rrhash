@@ -6,7 +6,7 @@
 #include "Tracer.h"
 using namespace std;
 
-#define ITER_COUNT 40
+#define ITER_COUNT 8
 
 struct Pair {
 	uint32_t a;
